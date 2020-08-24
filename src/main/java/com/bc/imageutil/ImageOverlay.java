@@ -7,5 +7,5 @@ import java.awt.image.BufferedImage;
  */
 public interface ImageOverlay {
 
-    void drawString(BufferedImage image, String stringToDraw);
+    void drawString(BufferedImage image, String stringToDraw, DrawConfig config);
 }

@@ -1,59 +1,33 @@
 package com.bc.imageutil.impl;
 
-import com.bc.imageutil.DrawOffset;
-import com.bc.imageutil.DrawOffsets;
 import com.bc.imageutil.ImageOverlay;
-import com.bc.imageutil.MathUtil;
-import java.awt.Color;
-import java.awt.Font;
 import java.awt.Graphics2D;
 import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
-import java.util.Objects;
+import com.bc.imageutil.DrawConfig;
 
 /**
  * @author hp
  */
 public class OverlayImageWithText implements ImageOverlay {
     
-    private final DrawOffset drawOffset;
-
-    public OverlayImageWithText() {
-        this(DrawOffsets.centre());
-    }
-    
-    public OverlayImageWithText(DrawOffset drawOffset) {
-        this.drawOffset = Objects.requireNonNull(drawOffset);
-    }
+    public OverlayImageWithText() { }
     
     @Override
-    public void drawString(BufferedImage image, String stringToDraw) {
-        
-        Font font = this.getSuggestedFont(image, stringToDraw);
-        
-        drawString(image, stringToDraw, font, Color.LIGHT_GRAY);
-    }
-
-    public Font getSuggestedFont(BufferedImage image, String stringToDraw) {
-     
-        double factor = stringToDraw.length() * 0.66;
-        
-        int fontSize = MathUtil.divide(image.getWidth(), factor).intValue();
-        
-        Font font = new Font(Font.SERIF, Font.BOLD, fontSize);
-
-        return font;
-    }
-    
-    public void drawString(BufferedImage image, String stringToDraw, Font font, Color color) {
+    public void drawString(BufferedImage image, String stringToDraw, DrawConfig config) {
         
         Graphics2D g = (Graphics2D)image.getGraphics();
-        g.setFont(font);
-        g.setColor(color);
+        g.setFont(config.getFont(image, stringToDraw));
+        g.setColor(config.getColor(image, stringToDraw));
 
         Rectangle2D rec = g.getFontMetrics().getStringBounds(stringToDraw, g);
         
-        final int [] xy = drawOffset.get(image, rec);
+//        System.out.println("Image["+image.getWidth()+", "+image.getHeight()+"]");
+//        System.out.println("Rectangle2D["+rec.getWidth()+", "+rec.getHeight()+"]");
+        
+        final int [] xy = config.getOffset(image, rec);
+        
+//        System.out.println("DrawOffset"+Arrays.toString(xy)+"");
         
         g.drawString(stringToDraw, xy[0], xy[1]);
 

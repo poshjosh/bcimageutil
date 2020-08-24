@@ -27,11 +27,17 @@ import java.util.Map;
 
 /**
  * @author Chinomso Bassey Ikwuagwu on Sep 4, 2017 8:11:14 PM
+ * @deprecated 
  */
+@Deprecated
 public interface ImageManager extends ImageRescaler, com.bc.imageutil.ImageReader, ImageOverlay{
     
     static MathContext getDefaultMathContext() {
         return MathUtil.getDefaultContext();
+    }
+    
+    default void drawString(BufferedImage image, String stringToDraw) {
+        this.drawString(image, stringToDraw, DrawConfigs.centre());
     }
 
     String buildRelativePath(String filename);

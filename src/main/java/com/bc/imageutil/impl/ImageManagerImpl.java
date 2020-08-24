@@ -6,6 +6,7 @@
  */
 package com.bc.imageutil.impl;
 
+import com.bc.imageutil.DrawConfig;
 import com.bc.imageutil.ImageDimensions;
 import com.bc.imageutil.ImageInfo;
 import com.bc.imageutil.ImageManager;
@@ -39,7 +40,9 @@ import java.util.logging.Logger;
  * @author  chinomso bassey ikwuagwu
  * @version 1.0
  * @since   1.0
+ * @deprecated
  */
+@Deprecated
 public class ImageManagerImpl implements Serializable, ImageManager {
     
     private final Function<String, String> getPathForFilename;
@@ -89,8 +92,8 @@ public class ImageManagerImpl implements Serializable, ImageManager {
     }
 
     @Override
-    public void drawString(BufferedImage image, String stringToDraw) {
-        imageOverlay.drawString(image, stringToDraw);
+    public void drawString(BufferedImage image, String stringToDraw, DrawConfig config) {
+        imageOverlay.drawString(image, stringToDraw, config);
     }
     
     @Override

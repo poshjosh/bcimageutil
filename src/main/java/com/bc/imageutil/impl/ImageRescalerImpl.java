@@ -12,32 +12,33 @@ import java.awt.image.BufferedImage;
 public class ImageRescalerImpl implements ImageRescaler{
     
     @Override
-    public BufferedImage scaleImage(Image image, int width, int height, int type) {
+    public BufferedImage scaleImage(Image source, int width, int height, int type) {
 
         if(width == -1 || height == -1) return null;
 
-        BufferedImage bufferedImage = new BufferedImage(width, height, type);
+        BufferedImage targetImage = new BufferedImage(width, height, type);
 
-        Graphics2D g = bufferedImage.createGraphics();
+        Graphics2D targetGraphics = targetImage.createGraphics();
 
         // Note the use of BILNEAR filtering to enable smooth scaling
-        g.setRenderingHint(RenderingHints.KEY_INTERPOLATION,
+        targetGraphics.setRenderingHint(RenderingHints.KEY_INTERPOLATION,
                                     RenderingHints.VALUE_INTERPOLATION_BILINEAR);
 
         // These are suppposed to improve image quality
-        g.setRenderingHint(RenderingHints.KEY_RENDERING,
+        targetGraphics.setRenderingHint(RenderingHints.KEY_RENDERING,
                                     RenderingHints.VALUE_RENDER_QUALITY);
-        g.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
+        targetGraphics.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
                                     RenderingHints.VALUE_ANTIALIAS_ON);
 
-        g.setComposite(java.awt.AlphaComposite.Src);
+        targetGraphics.setComposite(java.awt.AlphaComposite.Src);
 
-//        g.setColor(Color.white);
-//        g.fillRect(0,0,width,height);
-//        g.drawImage(image,0,0,null);
-        g.drawImage(image, 0, 0, width, height, null);
-        g.dispose();
+//        targetGraphics.setColor(Color.white);
+//        targetGraphics.fillRect(0,0,width,height);
+//        targetGraphics.drawImage(image,0,0,null);
+        targetGraphics.drawImage(source, 0, 0, width, height, null);
 
-        return bufferedImage;
+        targetGraphics.dispose();
+
+        return targetImage;
     }
 }
