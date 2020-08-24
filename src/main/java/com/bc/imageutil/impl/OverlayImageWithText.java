@@ -1,18 +1,30 @@
 package com.bc.imageutil.impl;
 
+import com.bc.imageutil.DrawOffset;
+import com.bc.imageutil.DrawOffsets;
 import com.bc.imageutil.ImageOverlay;
 import com.bc.imageutil.MathUtil;
 import java.awt.Color;
 import java.awt.Font;
-import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
+import java.util.Objects;
 
 /**
  * @author hp
  */
 public class OverlayImageWithText implements ImageOverlay {
+    
+    private final DrawOffset drawOffset;
+
+    public OverlayImageWithText() {
+        this(DrawOffsets.centre());
+    }
+    
+    public OverlayImageWithText(DrawOffset drawOffset) {
+        this.drawOffset = Objects.requireNonNull(drawOffset);
+    }
     
     @Override
     public void drawString(BufferedImage image, String stringToDraw) {
@@ -41,18 +53,16 @@ public class OverlayImageWithText implements ImageOverlay {
 
         Rectangle2D rec = g.getFontMetrics().getStringBounds(stringToDraw, g);
         
-        int [] xy = this.getDrawOffset(image, rec);
+        final int [] xy = drawOffset.get(image, rec);
         
         g.drawString(stringToDraw, xy[0], xy[1]);
 
         g.dispose();
     }
-    
-    public int [] getDrawOffset(BufferedImage image, Rectangle2D rec) {
-        int x = MathUtil.divide(image.getWidth() - rec.getWidth(), 2).intValue();
-        int y = MathUtil.divide(image.getHeight() - rec.getHeight(), 2).intValue();
-        return new int[]{x, y};
-    }
+}
+/**
+ * 
+ * 
     
     public double [] getTopLeftStart(BufferedImage image, String stringToDraw) {
         Graphics g = image.getGraphics();
@@ -126,4 +136,5 @@ System.out.println("X edge: "+x_edge+", Y edge:"+y_edge);
 
         g.dispose();
     }
-}
+ * 
+ */
