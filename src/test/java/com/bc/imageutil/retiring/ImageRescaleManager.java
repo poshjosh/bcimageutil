@@ -1,5 +1,6 @@
-package com.bc.imageutil;
+package com.bc.imageutil.retiring;
 
+import com.bc.imageutil.ImageManager;
 import com.bc.imageutil.impl.ImageManagerImpl;
 import java.awt.Dimension;
 import java.io.File;
