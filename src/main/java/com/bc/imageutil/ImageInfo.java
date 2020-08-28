@@ -1288,4 +1288,9 @@ public class ImageInfo {
             }
         }
     }
+
+    @Override
+    public String toString() {
+        return "ImageInfo{" + "width=" + width + ", height=" + height + ", bitsPerPixel=" + bitsPerPixel + ", colorType=" + colorType + ", progressive=" + progressive + ", format=" + format + ", collectComments=" + collectComments + ", comments=" + comments + ", determineNumberOfImages=" + determineNumberOfImages + ", numberOfImages=" + numberOfImages + ", physicalHeightDpi=" + physicalHeightDpi + ", physicalWidthDpi=" + physicalWidthDpi + '}';
+    }
 }

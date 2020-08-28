@@ -1,5 +1,7 @@
 package com.bc.imageutil;
 
+import com.bc.imageutil.DrawConfig;
+import com.bc.imageutil.MathUtil;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.geom.Rectangle2D;
