@@ -5,7 +5,7 @@
     <parent>
         <groupId>io.github.poshjosh</groupId>
         <artifactId>parent</artifactId>
-        <version>1.0-SNAPSHOT</version>
+        <version>1.0.2</version>
         <relativePath>../parent/pom.xml</relativePath>
     </parent>
 
@@ -16,6 +16,12 @@
     <description>Java library for manipulating images e.g extract image info, resize images, add text overlay etc</description>
 
     <dependencies>
+        <!-- Required when using Java 9 and above -->
+        <dependency>
+            <groupId>com.sun.activation</groupId>
+            <artifactId>javax.activation</artifactId>
+            <version>1.2.0</version>
+        </dependency>
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
