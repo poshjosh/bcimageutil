@@ -5,12 +5,12 @@
     <parent>
         <groupId>io.github.poshjosh</groupId>
         <artifactId>parent</artifactId>
-        <version>1.0-SNAPSHOT</version>
+        <version>1.0.2</version>
         <relativePath>../parent/pom.xml</relativePath>
     </parent>
 
     <artifactId>bcimageutil</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <version>1.0</version>
     <packaging>jar</packaging>
     <name>${project.artifactId}</name>
     <description>Java library for manipulating images e.g extract image info, resize images, add text overlay etc</description>
